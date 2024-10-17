@@ -1,4 +1,4 @@
 package com.theprojectchow.backend.inventories.domain.model.queries;
 
-public record GetAllCoursesQuery() {
+public record GetAllMaterialsQuery() {
 }
