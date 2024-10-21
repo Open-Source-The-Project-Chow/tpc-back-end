@@ -35,4 +35,10 @@ public class Material extends AuditableAbstractAggregateRoot<Material> {
         this.stand = command.stand();
     }
 
+    public Material updateInformation(String name, int quantity, String stand) {
+        this.name = name;
+        this.quantity = quantity;
+        this.stand = stand;
+        return this;
+    }
 }
