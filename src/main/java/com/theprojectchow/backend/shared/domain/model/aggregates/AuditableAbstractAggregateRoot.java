@@ -1,5 +1,6 @@
 package com.theprojectchow.backend.shared.domain.model.aggregates;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,16 +16,17 @@ public class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> 
 
     @Id
     @Getter
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter
     @CreatedDate
+    @JsonIgnore
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
     @Getter
     @LastModifiedDate
+    @JsonIgnore
     @Column(nullable = false)
     private Date updatedAt;
 }
