@@ -2,6 +2,7 @@ package com.theprojectchow.backend.profile.interfaces.REST;
 
 import com.theprojectchow.backend.profile.application.internal.queryservices.ProfileQueryServiceImpl;
 import com.theprojectchow.backend.profile.domain.model.commands.DeleteProfileCommand;
+import com.theprojectchow.backend.profile.domain.model.queries.GetAllProfilesByStatusQuery;
 import com.theprojectchow.backend.profile.domain.model.queries.GetAllProfilesQuery;
 import com.theprojectchow.backend.profile.domain.model.queries.GetProfileByIdQuery;
 import com.theprojectchow.backend.profile.domain.services.ProfileCommandService;
@@ -55,6 +56,16 @@ public class ProfileController {
         }
         var profileResource = ProfileResourceFromEntityAssembler.toResourceFromEntity(profile.get());
         return new ResponseEntity<>(profileResource, HttpStatus.OK);
+    }
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<ProfileResource>> getProfilesByStatus(@PathVariable String status) {
+        var getAllProfilesByStatusQuery = new GetAllProfilesByStatusQuery(status);
+        var profiles = profileQueryService.handle(getAllProfilesByStatusQuery);
+        if(profiles.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        var profileResources = profiles.stream().map(ProfileResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(profileResources);
     }
     @GetMapping
     public ResponseEntity<List<ProfileResource>> getAllProfiles(){
