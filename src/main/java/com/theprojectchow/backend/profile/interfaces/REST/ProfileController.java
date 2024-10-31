@@ -9,8 +9,10 @@ import com.theprojectchow.backend.profile.domain.services.ProfileCommandService;
 import com.theprojectchow.backend.profile.domain.services.ProfileQueryService;
 import com.theprojectchow.backend.profile.interfaces.REST.resources.CreateProfileResource;
 import com.theprojectchow.backend.profile.interfaces.REST.resources.ProfileResource;
+import com.theprojectchow.backend.profile.interfaces.REST.resources.UpdateProfileResource;
 import com.theprojectchow.backend.profile.interfaces.REST.transform.CreateProfileCommandFromAssembler;
 import com.theprojectchow.backend.profile.interfaces.REST.transform.ProfileResourceFromEntityAssembler;
+import com.theprojectchow.backend.profile.interfaces.REST.transform.UpdateProfileCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,5 +81,15 @@ public class ProfileController {
         var deleteProfileCommand = new DeleteProfileCommand(profileId);
         profileCommandService.handle(deleteProfileCommand);
         return ResponseEntity.ok().build();
+    }
+    @PutMapping("/{profileId}")
+    public ResponseEntity<ProfileResource> updateProfile(@PathVariable Long profileId, @RequestBody UpdateProfileResource profileResource) {
+        var updateProfileCommand = UpdateProfileCommandFromResourceAssembler.toCommandFromResource(profileId, profileResource);
+        var updatedProfile = profileCommandService.handle(updateProfileCommand);
+        if(updatedProfile.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        var profileResourceUpdated = ProfileResourceFromEntityAssembler.toResourceFromEntity(updatedProfile.get());
+        return new ResponseEntity<>(profileResourceUpdated, HttpStatus.OK);
     }
 }
