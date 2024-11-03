@@ -7,7 +7,7 @@ import com.theprojectchow.backend.inventories.domain.model.commands.DeleteInvent
 public interface InventoryCommandService {
 
     // Método para manejar la creación de un inventario
-    void handle(CreateInventoryCommand command);
+    Long handle(CreateInventoryCommand command);
 
     // Método para manejar la eliminación de un inventario
     void handle(DeleteInventoryCommand command);

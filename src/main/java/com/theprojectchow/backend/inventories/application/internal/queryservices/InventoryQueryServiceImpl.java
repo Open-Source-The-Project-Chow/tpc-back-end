@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class InventoryQueryServiceImpl implements InventoryQueryService {
 
-    private static final Logger logger = LoggerFactory.getLogger(InventoryQueryServiceImpl.class); // Agrega Logger
+    //private static final Logger logger = LoggerFactory.getLogger(InventoryQueryServiceImpl.class); // Agrega Logger
 
     private final InventoryRepository inventoryRepository;
 
@@ -24,7 +24,17 @@ public class InventoryQueryServiceImpl implements InventoryQueryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    // Maneja la consulta para obtener todos los inventarios
+    @Override
+    public List<Inventory> handle(GetAllInventorysQuery query) {
+        return inventoryRepository.findAll();
+    }
+
+    @Override
+    public Optional<Inventory> handle(GetInventoryByIdQuery query) {
+        return inventoryRepository.findById(query.inventoryId());
+    }
+
+    /*// Maneja la consulta para obtener todos los inventarios
     @Override
     public List<Inventory> handle(GetAllInventorysQuery query) {
         logger.info("Consultando todos los inventarios");
@@ -41,5 +51,5 @@ public class InventoryQueryServiceImpl implements InventoryQueryService {
                     logger.warn("Inventario con ID {} no encontrado", query.getId());
                     return Optional.empty(); // Evita retornar null, opción más segura
                 });
-    }
+    }*/
 }

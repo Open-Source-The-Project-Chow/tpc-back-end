@@ -9,7 +9,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InventoryResourceFromEntityAssembler {
+    /*public static InventoryResource toResourceFromEntity(Inventory entity) {
+        return new InventoryResource(entity.getId(), entity.getStandName(), entity.getMaterials());
+    }*/
 
+    public static InventoryResource toResourceFromEntity(Inventory entity) {
+        List<MaterialResource> materials = entity.getMaterials().stream()
+                .map(MaterialResourceFromEntityAssembler::toResourceFromEntity)
+                .collect(Collectors.toList());
+
+        return new InventoryResource(entity.getId(), entity.getStandName(), materials);
+    }
+
+    /*
     public static InventoryResource toResourceFromEntity(Inventory entity) {
         List<MaterialResource> materials = entity.getMaterials().stream()
                 .map(InventoryResourceFromEntityAssembler::toMaterialResource)
@@ -30,5 +42,5 @@ public class InventoryResourceFromEntityAssembler {
                 material.getQuantity(),
                 material.getStand()
         );
-    }
+    }*/
 }
