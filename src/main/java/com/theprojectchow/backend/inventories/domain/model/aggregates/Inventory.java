@@ -20,14 +20,17 @@ public class Inventory extends AuditableAbstractAggregateRoot<Inventory> {
 
     private String standName;
 
-    @OneToMany
-    private List<Material> materials;
+    @OneToMany(mappedBy = "inventory")
+    private List<Material> materials = new ArrayList<>();
 
     // Constructor vacío
-    public Inventory() {
+    /*public Inventory() {
         this.standName = "";
         this.materials = List.of();
         //this.materials = new ArrayList<>();
+    }*/
+    public Inventory() {
+        this.standName = "";
     }
 
     // Constructor con parámetros

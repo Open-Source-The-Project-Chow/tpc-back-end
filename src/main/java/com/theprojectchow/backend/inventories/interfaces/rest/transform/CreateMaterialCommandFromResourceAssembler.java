@@ -5,6 +5,6 @@ import com.theprojectchow.backend.inventories.interfaces.rest.resources.CreateMa
 
 public class CreateMaterialCommandFromResourceAssembler {
     public static CreateMaterialCommand toCommandFromResource(CreateMaterialResource resource) {
-        return new CreateMaterialCommand(resource.name(), resource.quantity(), resource.stand());
+        return new CreateMaterialCommand(resource.inventoryId(),resource.name(), resource.quantity(), resource.stand());
     }
 }
