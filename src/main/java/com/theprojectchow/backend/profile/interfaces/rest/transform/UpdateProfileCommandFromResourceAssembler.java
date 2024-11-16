@@ -1,7 +1,7 @@
-package com.theprojectchow.backend.profile.interfaces.REST.transform;
+package com.theprojectchow.backend.profile.interfaces.rest.transform;
 
 import com.theprojectchow.backend.profile.domain.model.commands.UpdateProfileCommand;
-import com.theprojectchow.backend.profile.interfaces.REST.resources.UpdateProfileResource;
+import com.theprojectchow.backend.profile.interfaces.rest.resources.UpdateProfileResource;
 
 public class UpdateProfileCommandFromResourceAssembler {
     public static UpdateProfileCommand toCommandFromResource(Long id, UpdateProfileResource updateProfileResource){

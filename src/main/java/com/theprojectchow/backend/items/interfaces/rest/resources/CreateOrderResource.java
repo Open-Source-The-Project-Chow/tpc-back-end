@@ -1,4 +1,7 @@
 package com.theprojectchow.backend.items.interfaces.rest.resources;
 
-public record CreateOrderResource (String craftsmanName, String distributorName, String status,String description) {
+import com.theprojectchow.backend.profile.domain.model.aggregates.Buyer;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Craftsman;
+
+public record CreateOrderResource (Craftsman craftsman, Buyer buyer, String status, String description) {
 }

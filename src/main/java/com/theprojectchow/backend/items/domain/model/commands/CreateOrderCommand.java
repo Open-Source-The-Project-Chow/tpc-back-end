@@ -1,4 +1,7 @@
 package com.theprojectchow.backend.items.domain.model.commands;
 
-public record CreateOrderCommand (String craftsmanName, String distributorName, String status,String description) {
+import com.theprojectchow.backend.profile.domain.model.aggregates.Buyer;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Craftsman;
+
+public record CreateOrderCommand (Craftsman craftsman, Buyer buyer, String status, String description) {
 }

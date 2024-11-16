@@ -42,7 +42,7 @@ public class PostCommandServiceImpl  implements PostCommandService {
         }
         var postToUpdate = result.get();
         try {
-            var updatedPost = postRepository.save(postToUpdate.updateInformation(command.title(), command.content(), command.image()));
+            var updatedPost = postRepository.save(postToUpdate.updateInformation(command.content(), command.image()));
             return Optional.of(updatedPost);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error updating post"+e.getMessage());

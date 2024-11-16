@@ -3,21 +3,26 @@ package com.theprojectchow.backend.items.domain.model.aggregates;
 
 import com.theprojectchow.backend.items.domain.model.commands.CreateOrderCommand;
 import com.theprojectchow.backend.items.domain.model.valueobjects.OrderStatus;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Buyer;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Craftsman;
 import com.theprojectchow.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 
 @Entity
 public class Order extends AuditableAbstractAggregateRoot<Order> {
 
-    /*@Getter
+    @Getter
     @ManyToOne
     @JoinColumn(name = "craftsman_id")
     private Craftsman craftsman;
 
     @Getter
     @ManyToOne
-    @JoinColumn(name = "craftsman_id")
-    private Distributor distributor;*/
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
     private String distributorName;
     private String craftsmanName;
@@ -29,16 +34,16 @@ public class Order extends AuditableAbstractAggregateRoot<Order> {
     public Order() {
     }
 
-    public Order(String distributorName, String craftsmanName,String description) {
-        this.craftsmanName = craftsmanName;
-        this.distributorName = distributorName;
+    public Order(Buyer buyer, Craftsman craftsman,String description) {
+        this.craftsman = craftsman;
+        this.buyer = buyer;
         this.description = description;
         this.status = OrderStatus.REQUESTED;
     }
 
     public Order(CreateOrderCommand command) {
-        this.craftsmanName = command.craftsmanName();
-        this.distributorName = command.distributorName();
+        this.craftsman = command.craftsman();
+        this.buyer = command.buyer();
         this.description =  command.description();
         this.status = OrderStatus.REQUESTED;
     }

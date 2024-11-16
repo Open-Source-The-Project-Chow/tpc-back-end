@@ -1,4 +1,4 @@
 package com.theprojectchow.backend.forum.domain.model.commands;
 
-public record CreatePostCommand(String title, String content, String image) {
+public record CreatePostCommand(String content, String image) {
 }

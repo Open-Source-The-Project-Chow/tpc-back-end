@@ -1,7 +1,7 @@
-package com.theprojectchow.backend.profile.interfaces.REST.transform;
+package com.theprojectchow.backend.profile.interfaces.rest.transform;
 
 import com.theprojectchow.backend.profile.domain.model.aggregates.Profile;
-import com.theprojectchow.backend.profile.interfaces.REST.resources.ProfileResource;
+import com.theprojectchow.backend.profile.interfaces.rest.resources.ProfileResource;
 
 public class ProfileResourceFromEntityAssembler {
     public static ProfileResource toResourceFromEntity(Profile profile){

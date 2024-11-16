@@ -5,6 +5,10 @@ import com.theprojectchow.backend.items.interfaces.rest.resources.CreateOrderRes
 
 public record CreateOrderCommandFromAssembler() {
     public static CreateOrderCommand toCommandFromResource(CreateOrderResource resource) {
-        return new CreateOrderCommand(resource.craftsmanName(),resource.distributorName(),resource.status(),resource.description());
+        return new CreateOrderCommand(
+                resource.craftsman(),
+                resource.buyer(),
+                resource.status(),
+                resource.description());
     }
 }
