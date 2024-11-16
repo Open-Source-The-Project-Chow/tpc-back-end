@@ -1,5 +1,5 @@
 package com.theprojectchow.backend.profile.domain.model.entities;
-
+/*
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
@@ -41,3 +41,4 @@ public class User {
         this.image = image;
     }
 }
+*/
