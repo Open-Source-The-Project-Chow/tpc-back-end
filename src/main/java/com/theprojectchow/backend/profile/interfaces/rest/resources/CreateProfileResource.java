@@ -1,4 +1,4 @@
-package com.theprojectchow.backend.profile.interfaces.REST.resources;
+package com.theprojectchow.backend.profile.interfaces.rest.resources;
 
 public record CreateProfileResource(
         String username,

@@ -1,16 +1,19 @@
 package com.theprojectchow.backend.profile.domain.services;
 
-import com.theprojectchow.backend.profile.domain.model.aggregates.Profile;
-import com.theprojectchow.backend.profile.domain.model.commands.ChangeProfileStatusCommand;
-import com.theprojectchow.backend.profile.domain.model.commands.CreateProfileCommand;
-import com.theprojectchow.backend.profile.domain.model.commands.UpdateProfileCommand;
-import com.theprojectchow.backend.profile.domain.model.commands.DeleteProfileCommand;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Buyer;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Craftsman;
+import com.theprojectchow.backend.profile.domain.model.commands.CreateBuyerCommand;
+import com.theprojectchow.backend.profile.domain.model.commands.CreateCraftsmanCommand;
+import com.theprojectchow.backend.profile.domain.model.commands.UpdateBuyerCommand;
+import com.theprojectchow.backend.profile.domain.model.commands.UpdateCraftsmanCommand;
 
 import java.util.Optional;
 
 public interface ProfileCommandService {
-    Long handle(CreateProfileCommand command);
-    Optional<Profile> handle(UpdateProfileCommand command);
-    void handle(DeleteProfileCommand command);
-    void handle(ChangeProfileStatusCommand command);
+
+    Optional<Buyer> handle(UpdateBuyerCommand command);
+    Optional<Craftsman> handle(UpdateCraftsmanCommand command);
+
+    Optional<Buyer> handle(CreateBuyerCommand command);
+    Optional<Craftsman> handle(CreateCraftsmanCommand command);
 }

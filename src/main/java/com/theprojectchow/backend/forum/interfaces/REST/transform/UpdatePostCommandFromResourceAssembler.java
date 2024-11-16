@@ -5,6 +5,6 @@ import com.theprojectchow.backend.forum.interfaces.REST.resources.UpdatePostReso
 
 public class UpdatePostCommandFromResourceAssembler {
     public static UpdatePostCommand toCommandFromResource(Long  postId, UpdatePostResource resource) {
-        return new UpdatePostCommand(postId,resource.title(), resource.content(), resource.image());
+        return new UpdatePostCommand(postId, resource.content(), resource.image());
     }
 }

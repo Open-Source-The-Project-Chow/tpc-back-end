@@ -1,11 +1,19 @@
 package com.theprojectchow.backend.profile.application.internal.queryservices;
 
-import com.theprojectchow.backend.profile.domain.model.aggregates.Profile;
-import com.theprojectchow.backend.profile.domain.model.queries.GetAllProfilesByStatusQuery;
-import com.theprojectchow.backend.profile.domain.model.queries.GetAllProfilesQuery;
-import com.theprojectchow.backend.profile.domain.model.queries.GetProfileByIdQuery;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Buyer;
+import com.theprojectchow.backend.profile.domain.model.aggregates.Craftsman;
+import com.theprojectchow.backend.profile.domain.model.queries.buyer.GetAllBuyersQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.buyer.GetBuyerByEmailQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.buyer.GetBuyerByIdQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.buyer.GetBuyerByProfileIdQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.craftsman.GetAllCraftsmansQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.craftsman.GetCraftsmanByEmailQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.craftsman.GetCraftsmanByIdQuery;
+import com.theprojectchow.backend.profile.domain.model.queries.craftsman.GetCraftsmanByProfileIdQuery;
+import com.theprojectchow.backend.profile.domain.model.valueobjects.ProfileId;
 import com.theprojectchow.backend.profile.domain.services.ProfileQueryService;
-import com.theprojectchow.backend.profile.infrastructure.persistence.jpa.repositories.ProfileRepository;
+import com.theprojectchow.backend.profile.infrastructure.persistence.jpa.repositories.BuyerRepository;
+import com.theprojectchow.backend.profile.infrastructure.persistence.jpa.repositories.CraftsmanRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,24 +21,48 @@ import java.util.Optional;
 
 @Service
 public class ProfileQueryServiceImpl implements ProfileQueryService {
-    private final ProfileRepository profileRepository;
 
-    public ProfileQueryServiceImpl(ProfileRepository profileRepository) {
-        this.profileRepository = profileRepository;
+    private final BuyerRepository buyerRepository;
+    private final CraftsmanRepository craftsmanRepository;
+
+    public ProfileQueryServiceImpl(BuyerRepository buyerRepository, CraftsmanRepository craftsmanRepository) {
+        this.buyerRepository = buyerRepository;
+        this.craftsmanRepository = craftsmanRepository;
     }
 
     @Override
-    public Optional<Profile> handle(GetProfileByIdQuery query) {
-        return profileRepository.findById(query.id());
+    public List<Buyer> handle(GetAllBuyersQuery query) {
+        return buyerRepository.findAll();
+    }
+    @Override
+    public Optional<Buyer> handle(GetBuyerByEmailQuery query) {
+        return this.buyerRepository.findByEmail(query.emailAddress());
+    }
+    @Override
+    public Optional<Buyer> handle(GetBuyerByIdQuery query) {
+        return buyerRepository.findById(query.id());
+    }
+    @Override
+    public Optional<Buyer> handle(GetBuyerByProfileIdQuery query) {
+        var buyer = new ProfileId(query.profileId());
+        return buyerRepository.findByProfileId(buyer);
     }
 
     @Override
-    public List<Profile> handle(GetAllProfilesQuery query) {
-        return profileRepository.findAll();
+    public List<Craftsman> handle(GetAllCraftsmansQuery query) {
+        return craftsmanRepository.findAll();
     }
-
     @Override
-    public List<Profile> handle(GetAllProfilesByStatusQuery query) {
-        return profileRepository.findByStatus(query.status());
+    public Optional<Craftsman> handle(GetCraftsmanByEmailQuery query) {
+        return this.craftsmanRepository.findByEmail(query.emailAddress());
+    }
+    @Override
+    public Optional<Craftsman> handle(GetCraftsmanByIdQuery query) {
+        return craftsmanRepository.findById(query.id());
+    }
+    @Override
+    public Optional<Craftsman> handle(GetCraftsmanByProfileIdQuery query) {
+        var craftsman = new ProfileId(query.profileId());
+        return craftsmanRepository.findByProfileId(craftsman);
     }
 }
