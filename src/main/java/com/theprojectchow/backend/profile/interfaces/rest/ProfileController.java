@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/v1/api/profiles")
+@RequestMapping("/api/v1/profiles")
 @Tag(name = "Profiles", description = "Operations related to profiles")
 public class ProfileController {
     private final ProfileQueryService profileQueryService;
@@ -39,6 +39,30 @@ public class ProfileController {
         this.profileCommandService = profileCommandService;
     }
 
+    @GetMapping
+    ResponseEntity<List<CraftsmanResource>> getAllProfiles() {
+        var craftsman = profileQueryService.findAll();
+        if (craftsman.isEmpty()) return ResponseEntity.notFound().build();
+        var craftsmanResponse = craftsman.get().stream()
+                .map(CraftsmanResourceFromEntityAssembler::toResourceFromEntity)
+                .collect(java.util.stream.Collectors.toList());
+        return ResponseEntity.ok(craftsmanResponse);
+    }
+
+    @PostMapping
+    public ResponseEntity<CraftsmanResource> createProfile(@RequestBody CreateCraftsmanResource createCraftsmanResource){
+        var createCraftsmanCommand = CreateCraftsmanCommandFromResourceAssembler.toCommandFromResource(createCraftsmanResource);
+        var craftsmanId = profileCommandService.handle(createCraftsmanCommand);
+        if (craftsmanId == 0L) return ResponseEntity.badRequest().build();
+
+        var craftsman = profileQueryService.findById(craftsmanId);
+        if (craftsman.isEmpty()) return ResponseEntity.badRequest().build();
+
+        var craftsmanResource = CraftsmanResourceFromEntityAssembler.toResourceFromEntity(craftsman.get());
+        return ResponseEntity.ok(craftsmanResource);
+    }
+
+    /*
     @PostMapping("/craftsman")
     public ResponseEntity<CraftsmanResource> createCraftsman(@RequestBody CreateCraftsmanResource resource) {
         var createCraftsmanCommand = CreateCraftsmanCommandFromResourceAssembler.toCommandFromResource(resource);
@@ -113,7 +137,7 @@ public class ProfileController {
                 .map(BuyerResourceFromEntityAssembler::toResourceFromEntity)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(buyerResources);
-    }
+    }*/
 
 
 }

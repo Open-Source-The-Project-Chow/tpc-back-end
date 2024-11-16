@@ -1,5 +1,5 @@
 package com.theprojectchow.backend.profile.interfaces.rest.transform;
-
+/*
 import com.theprojectchow.backend.profile.domain.model.aggregates.Profile;
 import com.theprojectchow.backend.profile.interfaces.rest.resources.ProfileResource;
 
@@ -15,4 +15,4 @@ public class ProfileResourceFromEntityAssembler {
                                    profile.getUser().getImage(),
                                    profile.getStatus());
     }
-}
+}*/

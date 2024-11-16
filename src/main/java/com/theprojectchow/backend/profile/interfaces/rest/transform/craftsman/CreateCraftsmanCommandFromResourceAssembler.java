@@ -9,9 +9,9 @@ public class CreateCraftsmanCommandFromResourceAssembler {
                 resource.firstName(),
                 resource.lastName(),
                 resource.email(),
-                resource.craftsmanPhone(),
-                resource.craftsmanAge(),
-                resource.craftsmanNationality(),
-                resource.userId());
+                resource.phone(),
+                resource.username(),
+                resource.password(),
+                resource.roles());
     }
 }

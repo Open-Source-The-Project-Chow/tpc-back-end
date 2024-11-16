@@ -11,9 +11,11 @@ import java.util.Optional;
 
 public interface ProfileCommandService {
 
+    Long handle(CreateCraftsmanCommand command);
+    /*
     Optional<Buyer> handle(UpdateBuyerCommand command);
     Optional<Craftsman> handle(UpdateCraftsmanCommand command);
 
     Optional<Buyer> handle(CreateBuyerCommand command);
-    Optional<Craftsman> handle(CreateCraftsmanCommand command);
+    Optional<Craftsman> handle(CreateCraftsmanCommand command);*/
 }

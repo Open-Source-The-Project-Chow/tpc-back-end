@@ -1,42 +1,28 @@
 package com.theprojectchow.backend.profile.domain.model.aggregates;
 
-import com.theprojectchow.backend.profile.domain.model.entities.User;
 import com.theprojectchow.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import jakarta.persistence.Embedded;
 import java.util.Date;
 
 @Getter
-@Entity
-public class Profile extends AuditableAbstractAggregateRoot<Profile> {
-    @Embedded
-    private User user;
-    private String status;
-    private Date status_date;
-    private Date registration_date;
+@Embeddable
+@NoArgsConstructor
+public class Profile {
 
-    public Profile() {
-        this(new User(),
-                Strings.EMPTY);
-    }
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
 
-    public Profile(User user,
-                   String status) {
-        this.user= user;
-        this.registration_date = new Date();
-        this.status_date = new Date();
-        this.status = status;
-    }
-
-    public Profile updateInformation(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public void changeStatus(String status) {
-        this.status = status;
-        this.status_date = new Date();
+    public Profile(String firstName, String lastName, String email, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
     }
 }

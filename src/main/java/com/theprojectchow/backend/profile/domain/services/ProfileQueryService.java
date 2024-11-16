@@ -16,6 +16,11 @@ import java.util.Optional;
 
 public interface ProfileQueryService {
 
+    Optional<Craftsman> findById(Long id);
+    Optional<Craftsman> findByUserId(Long userId);
+
+    Optional<List<Craftsman>> findAll();
+    /*
     List<Buyer> handle(GetAllBuyersQuery query);
     Optional<Buyer> handle(GetBuyerByEmailQuery query);
     Optional<Buyer> handle(GetBuyerByIdQuery query);
@@ -24,5 +29,5 @@ public interface ProfileQueryService {
     List<Craftsman> handle(GetAllCraftsmansQuery query);
     Optional<Craftsman> handle(GetCraftsmanByEmailQuery query);
     Optional<Craftsman> handle(GetCraftsmanByIdQuery query);
-    Optional<Craftsman> handle(GetCraftsmanByProfileIdQuery query);
+    Optional<Craftsman> handle(GetCraftsmanByProfileIdQuery query);*/
 }

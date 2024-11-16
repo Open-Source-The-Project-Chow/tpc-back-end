@@ -7,10 +7,9 @@ public class CraftsmanResourceFromEntityAssembler {
     public static CraftsmanResource toResourceFromEntity(Craftsman entity) {
         return new CraftsmanResource(
                 entity.getId(),
-                entity.getFullName(),
-                entity.getEmailAddress(),
-                entity.getCraftsmanAge(),
-                entity.getCraftsmanPhone(),
-                entity.getCraftsmanNationality());
+                entity.getProfile().getFirstName(),
+                entity.getProfile().getLastName(),
+                entity.getProfile().getEmail(),
+                entity.getProfile().getPhone());
     }
 }

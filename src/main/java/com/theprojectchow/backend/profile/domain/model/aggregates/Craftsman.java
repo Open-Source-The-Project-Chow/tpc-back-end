@@ -4,15 +4,34 @@ import com.theprojectchow.backend.profile.domain.model.commands.CreateCraftsmanC
 import com.theprojectchow.backend.profile.domain.model.valueobjects.EmailAddress;
 import com.theprojectchow.backend.profile.domain.model.valueobjects.PersonName;
 import com.theprojectchow.backend.profile.domain.model.valueobjects.ProfileId;
+import com.theprojectchow.backend.profile.domain.model.valueobjects.UserId;
 import com.theprojectchow.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
+@Setter
 public class Craftsman extends AuditableAbstractAggregateRoot<Craftsman> {
 
+    @Embedded
+    private Profile profile;
+
+    @Embedded
+    private UserId userId;
+
+    public Craftsman(CreateCraftsmanCommand command, UserId userId) {
+        this.profile = new Profile(command.firstName(), command.lastName(), command.email(), command.phone());
+        this.userId = userId;
+    }
+
+    public Craftsman() {
+        this.profile = new Profile("", "", "", "");
+    }
+
+    /*
     @Embedded
     private final ProfileId profileId;
     @Embedded
@@ -85,6 +104,6 @@ public class Craftsman extends AuditableAbstractAggregateRoot<Craftsman> {
 
     public String getFullName() { return craftsmanName.getFullName(); }
 
-    public String getEmailAddress() { return email.address(); }
+    public String getEmailAddress() { return email.address(); }*/
 
 }
