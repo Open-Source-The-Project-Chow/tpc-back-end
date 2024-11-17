@@ -5,6 +5,6 @@ import com.theprojectchow.backend.forum.interfaces.REST.resources.CreatePostReso
 
 public class CreatePostCommandFromAssembler {
         public static CreatePostCommand toCommandFromResource(CreatePostResource resource) {
-                return new CreatePostCommand(resource.content(), resource.image());
+                return new CreatePostCommand(resource.title() ,resource.content(), resource.image());
         }
 }
