@@ -1,6 +1,5 @@
 package com.theprojectchow.backend.profile.interfaces.rest.resources.craftsman;
 
-import java.util.Date;
 
 public record CraftsmanResource (
         Long id,
@@ -8,7 +7,5 @@ public record CraftsmanResource (
         String lastName,
         String email,
         String phone,
-        String image,
-        Date createdAt,
-        Date updatedAt) {
+        String image) {
 }
