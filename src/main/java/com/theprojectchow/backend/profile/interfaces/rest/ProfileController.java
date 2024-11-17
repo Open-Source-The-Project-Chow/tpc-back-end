@@ -79,17 +79,16 @@ public class ProfileController {
         if (updatedCraftsman.isEmpty()) return ResponseEntity.notFound().build();
         var craftsmanResource = CraftsmanResourceFromEntityAssembler.toResourceFromEntity(updatedCraftsman.get());
         return ResponseEntity.ok(craftsmanResource);
-    }
+    }*/
 
     @GetMapping("/{craftsmanId}")
     public ResponseEntity<CraftsmanResource> getCraftsmanById(@PathVariable Long craftsmanId) {
-        var getCraftsmanByIdQuery = new GetCraftsmanByIdQuery(craftsmanId);
-        var craftsman = profileQueryService.handle(getCraftsmanByIdQuery);
+        var craftsman = profileQueryService.findById(craftsmanId);
         if (craftsman.isEmpty()) return ResponseEntity.notFound().build();
         var craftsmanResource = CraftsmanResourceFromEntityAssembler.toResourceFromEntity(craftsman.get());
         return ResponseEntity.ok(craftsmanResource);
     }
-
+    /*
     @GetMapping("/craftsmans")
     public ResponseEntity<List<CraftsmanResource>> getAllCraftsmans() {
         var getAllCraftsmansQuery = new GetAllCraftsmansQuery();
