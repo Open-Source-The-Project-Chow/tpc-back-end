@@ -10,6 +10,9 @@ public class CraftsmanResourceFromEntityAssembler {
                 entity.getProfile().getFirstName(),
                 entity.getProfile().getLastName(),
                 entity.getProfile().getEmail(),
-                entity.getProfile().getPhone());
+                entity.getProfile().getPhone(),
+                entity.getProfile().getImage(),
+                entity.getCreatedAt(),
+                entity.getUpdatedAt());
     }
 }

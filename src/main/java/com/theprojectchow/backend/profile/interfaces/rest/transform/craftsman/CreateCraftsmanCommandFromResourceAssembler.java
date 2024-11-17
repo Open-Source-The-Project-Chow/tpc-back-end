@@ -10,6 +10,7 @@ public class CreateCraftsmanCommandFromResourceAssembler {
                 resource.lastName(),
                 resource.email(),
                 resource.phone(),
+                resource.image(),
                 resource.username(),
                 resource.password(),
                 resource.roles());

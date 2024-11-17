@@ -2,6 +2,7 @@ package com.theprojectchow.backend.items.interfaces.rest;
 
 import com.theprojectchow.backend.items.domain.model.commands.ConfirmOrderCommand;
 import com.theprojectchow.backend.items.domain.model.commands.RejectOrderCommand;
+import com.theprojectchow.backend.items.domain.model.queries.GetAllOrdersByCraftsmanNameQuery;
 import com.theprojectchow.backend.items.domain.model.queries.GetAllOrdersQuery;
 import com.theprojectchow.backend.items.domain.model.queries.GetOrderByIdQuery;
 import com.theprojectchow.backend.items.domain.services.OrderCommandService;
@@ -75,6 +76,15 @@ public class OrdersController {
     @GetMapping
     public ResponseEntity<List<OrderResource>> getAllOrders() {
         var getAllOrdersQuery = new GetAllOrdersQuery();
+
+        var orders = orderQueryService.handle(getAllOrdersQuery);
+        var orderResources = orders.stream().map(OrderResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(orderResources);
+    }
+
+    @GetMapping("/{craftsmanName}")
+    public ResponseEntity<List<OrderResource>> getOrdersByCraftsmanName(@PathVariable String craftsmanName) {
+        var getAllOrdersQuery = new GetAllOrdersByCraftsmanNameQuery(craftsmanName);
 
         var orders = orderQueryService.handle(getAllOrdersQuery);
         var orderResources = orders.stream().map(OrderResourceFromEntityAssembler::toResourceFromEntity).toList();

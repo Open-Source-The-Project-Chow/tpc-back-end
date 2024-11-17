@@ -7,6 +7,7 @@ public record CreateCraftsmanResource(
         String lastName,
         String email,
         String phone,
+        String image,
         String username,
         String password,
         List<String> roles

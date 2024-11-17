@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Entity
 @Setter
@@ -23,12 +25,12 @@ public class Craftsman extends AuditableAbstractAggregateRoot<Craftsman> {
     private UserId userId;
 
     public Craftsman(CreateCraftsmanCommand command, UserId userId) {
-        this.profile = new Profile(command.firstName(), command.lastName(), command.email(), command.phone());
+        this.profile = new Profile(command.firstName(), command.lastName(), command.email(), command.phone(), command.image());
         this.userId = userId;
     }
 
     public Craftsman() {
-        this.profile = new Profile("", "", "", "");
+        this.profile = new Profile("", "", "", "", "");
     }
 
     /*
